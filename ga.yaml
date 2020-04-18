@@ -1,0 +1,10 @@
+web:
+    port : 9000
+rtc:
+    bitrate : 512
+    frameRate : 30
+    iceServers:
+        - {url: "stun:121.89.193.35:23478"}
+        - {url: "turn:121.89.193.35:23478", username: "wadahana", password: "123456"}
+memu:
+    path : "C:\\Program Files\\Microvirt\\MEmu"
