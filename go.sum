@@ -66,6 +66,12 @@ github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
+github.com/wadahana/memu v0.0.0-20200318095451-f424fe25d04f h1:xpD7lJDMXfGkKO2NQqmDqZrmvw1ru65fC1thsGMpKFA=
+github.com/wadahana/memu v0.0.0-20200318095451-f424fe25d04f/go.mod h1:4eojEF/vU5g0MzjER+iT7BgZSSbDIvaAZg2dcvtMW+4=
+github.com/wadahana/memu v0.0.0-20200418063735-4328c32c3aa1 h1:dwNV8CBzGxxsrfnVdlgkbMgOOCTEuP25K0MqseSrbgM=
+github.com/wadahana/memu v0.0.0-20200418063735-4328c32c3aa1/go.mod h1:4eojEF/vU5g0MzjER+iT7BgZSSbDIvaAZg2dcvtMW+4=
+github.com/wadahana/wa v0.0.0-20200424034335-0fcf9f16f2f0 h1:Zmz0Mc0gH04t0X1y82jF+gfepuiVZYNbP4SHlC8t0q4=
+github.com/wadahana/wa v0.0.0-20200424034335-0fcf9f16f2f0/go.mod h1:6bE53yYBPgUV7PfUQalcGQal8CknS9hZJEVywlBCMYY=
 golang.org/x/crypto v0.0.0-20190228161510-8dd112bcdc25/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20190404164418-38d8ce5564a5 h1:bselrhR0Or1vomJZC8ZIjWtbDmn9OYFLX5Ik9alpJpE=

@@ -13,15 +13,9 @@ require (
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 // indirect
 	github.com/pion/sdp v1.3.0
 	github.com/pion/webrtc/v2 v2.1.0
-	github.com/wadahana/memu v0.0.0-20200318095451-f424fe25d04f
-	github.com/wadahana/wa v0.0.0-00010101000000-000000000000
+	github.com/wadahana/memu v0.0.0-20200418063735-4328c32c3aa1
+	github.com/wadahana/wa v0.0.0-20200424034335-0fcf9f16f2f0
 	golang.org/x/sync v0.0.0-20190227155943-e225da77a7e6 // indirect
 	golang.org/x/text v0.3.1-0.20180807135948-17ff2d5776d2 // indirect
 	gopkg.in/yaml.v2 v2.2.1
 )
-
-replace github.com/wadahana/memu => ../memu
-
-replace github.com/wadahana/wa => ../wa
-
-// /root/shared/ga-server/src/github.com/wadahana/memu

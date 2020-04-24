@@ -1,4 +1,5 @@
 
+#tags := vp8enc,win
 tags := vp8enc,memu
 tags := $(strip $(tags))
 
