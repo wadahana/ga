@@ -15,6 +15,8 @@ function loadScreens() {
     }
   }).then(res => {
     return res.json();
+  }).then(payload => {
+    return payload.content;
   }).catch(showError);
 }
 
@@ -30,6 +32,8 @@ function startSession(offer, screen) {
     }
   }).then(res => {
     return res.json();
+  }).then(payload => {
+    return payload.content;
   }).then(msg => {
     return msg.answer;
   });
@@ -123,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     response.screens.forEach(screen => {
       const option = document.createElement('option');
       //option.appendChild(document.createTextNode('Screen ' + (screen.index + 1)));
-      option.appendChild(document.createTextNode(screen.name);
+      option.appendChild(document.createTextNode(screen.name));
       option.setAttribute('value', screen.name);
       screenSelect.appendChild(option);
     });

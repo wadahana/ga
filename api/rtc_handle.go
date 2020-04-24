@@ -6,6 +6,7 @@ import (
 
 	"github.com/wadahana/ga/display"
 	"github.com/wadahana/ga/rtc"
+	"github.com/wadahana/memu"
 	"github.com/wadahana/memu/log"
 )
 
@@ -14,6 +15,13 @@ import (
 func MakeApiHandler(webrtc rtc.Service, disp display.Service) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/session", func(w http.ResponseWriter, r *http.Request) {
+		
+		var peer rtc.RemoteScreenConnection;
+		var payload []byte;
+		var answer string;
+		var err error = nil;
+		var _err *memu.MEmuError = nil;
+
 		if r.Method != http.MethodPost {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 			return
@@ -23,60 +31,70 @@ func MakeApiHandler(webrtc rtc.Service, disp display.Service) http.Handler {
 		dec := json.NewDecoder(r.Body)
 		req := newSessionRequest{}
 		
-		if err := dec.Decode(&req); err != nil {
-			handleError(w, err)
-			return
-		}
+		err = dec.Decode(&req);
+
 		log.Debugf("offer: %s\r\n", req.Offer);
-		peer, err := webrtc.CreateRemoteScreenConnection(req.Screen)
-		if err != nil {
-			handleError(w, err)
-			return
+		if err == nil {
+			peer, err = webrtc.CreateRemoteScreenConnection(req.Screen)
 		}
-		answer, err := peer.ProcessOffer(req.Offer)
+		
+		answer, err = peer.ProcessOffer(req.Offer)
 
-		if err != nil {
-			handleError(w, err)
-			return
-		}
 		log.Debugf("answer: %s\r\n", answer);
-		payload, err := json.Marshal(newSessionResponse{
-			Answer: answer,
-		})
+
+		if err != nil {
+			_err = memu.NewError(memu.RC_SystemError, err.Error())
+			payload, err = MakeResponseWithError(_err, nil);
+		} else {
+			payload, err = MakeResponseWithError(_err, newSessionResponse{
+				Answer: answer,
+			})
+		}
+		
 		if err != nil {
 			handleError(w, err)
 			return
 		}
-
 		w.Write(payload)
+
 	})
 
 	mux.HandleFunc("/screens", func(w http.ResponseWriter, r *http.Request) {
+
+		var payload []byte;
+		var err error = nil;
+		var _err *memu.MEmuError = nil;
+		var screensPayload []screenPayload = nil;
 		if r.Method != http.MethodGet {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 			return
 		}
 		log.Debugf("/screens ->");
+
 		screens, err := disp.Screens()
+		if err == nil {
+
+			screensPayload := make([]screenPayload, len(screens))
+
+			for i, s := range screens {
+				screensPayload[i].Index = s.Index
+				screensPayload[i].Name = s.Name
+			}
+		}
+
+		if err != nil {
+			_err = memu.NewError(memu.RC_SystemError, err.Error())
+			payload, err = MakeResponseWithError(_err, nil);
+		} else {
+			payload, err = MakeResponseWithError(_err, screensResponse{
+				Screens: screensPayload,
+			})
+		}
+		
 		if err != nil {
 			handleError(w, err)
 			return
 		}
-
-		screensPayload := make([]screenPayload, len(screens))
-
-		for i, s := range screens {
-			screensPayload[i].Index = s.Index
-			screensPayload[i].Name = s.Name
-		}
-		payload, err := json.Marshal(screensResponse{
-			Screens: screensPayload,
-		})
-		if err != nil {
-			handleError(w, err)
-			return
-		}
-
 		w.Write(payload)
 	})
 	log.Info("setup /api handler");
